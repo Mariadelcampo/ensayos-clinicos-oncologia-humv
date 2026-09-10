@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ensayos Clínicos Oncología - HUMV</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; color: #333; background-color: #f8f9fa; }
+        header { background-color: #004085; color: white; padding: 2rem 1rem; text-align: center; }
+        header h1 { margin: 0; font-size: 2rem; }
+        header p { margin-top: 0.5rem; font-size: 1.1rem; opacity: 0.9; }
+        .container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+        .card { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        h2 { color: #004085; border-bottom: 2px solid #e9ecef; padding-bottom: 0.5rem; }
+        .search-box { margin-bottom: 1rem; }
+        .search-box input { width: 100%; padding: 0.75rem; border: 1rem solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 1rem; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #dee2e6; }
+        th { background-color: #f1f3f5; color: #495057; }
+        .badge { background-color: #28a745; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+        footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: #6c757d; border-top: 1px solid #dee2e6; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Unidad de Ensayos Clínicos de Oncología</h1>
+        <p>Hospital Universitario Marqués de Valdecilla (HUMV)</p>
+    </header>
+
+    <div class="container">
+        <!-- SECCIÓN DE MÉTRICAS Y GRÁFICOS -->
+        <div class="card">
+            <h2>Métricas de Actividad y Reclutamiento</h2>
+            <p>Aquí incrustaremos tus gráficos interactivos creados en Flourish / Datawrapper.</p>
+            <div id="flourish-container" style="text-align: center; padding: 2rem; background: #e9ecef; border-radius: 6px; color: #6c757d;">
+                <em>[ Espacio reservado para el gráfico de Flourish ]</em>
+            </div>
+        </div>
+
+        <!-- BUSCADOR DE ENSAYOS -->
+        <div class="card">
+            <h2>Buscador de Ensayos Clínicos Activos</h2>
+            <div class="search-box">
+                <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Buscar por área tumoral, fármaco, fase, IP...">
+            </div>
+            
+            <table id="trialsTable">
+                <thead>
+                    <tr>
+                        <th>Área Tumoral</th>
+                        <th>Ensayo / Fármaco</th>
+                        <th>Fase</th>
+                        <th>Estado</th>
+                        <th>IP / Contacto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pulmón (NSCLC)</td>
+                        <td>GCT1184-09 (Rilvegostomig)</td>
+                        <td>Fase III</td>
+                        <td><span class="badge">Abierto</span></td>
+                        <td>Unidad de Ensayos</td>
+                    </tr>
+                    <tr>
+                        <td>Mama</td>
+                        <td>Trial-Amgen-02</td>
+                        <td>Fase II</td>
+                        <td><span class="badge">Abierto</span></td>
+                        <td>Unidad de Ensayos</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p>© Unidad de Ensayos Clínicos de Oncología - HUMV | Información de uso exclusivamente académico y asistencial</p>
+    </footer>
+
+    <script>
+        function filterTable() {
+            var input, filter, table, tr, td, i, j, txtValue, match;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("trialsTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) {
+                match = false;
+                td = tr[i].getElementsByTagName("td");
+                for (j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            match = true;
+                            break;
+                        }
+                    }
+                }
+                tr[i].style.display = match ? "" : "none";
+            }
+        }
+    </script>
+</body>
+</html>
